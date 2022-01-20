@@ -1,0 +1,24 @@
+{
+  "name": "fantasybook_api",
+  "version": "1.0.0",
+  "description": "REST API for FantasyBook",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akash-pateliya/FantasyBook_API.git"
+  },
+  "author": "Akash Pateliya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akash-pateliya/FantasyBook_API/issues"
+  },
+  "homepage": "https://github.com/akash-pateliya/FantasyBook_API#readme",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "faker": "^6.6.6",
+    "nodemon": "^2.0.15"
+  }
+}
