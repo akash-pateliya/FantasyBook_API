@@ -1,8 +1,9 @@
-const environment = require("../env/environment");
+const environment = require("../src/env/environment");
 // Google sheet npm package
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 // File handling package
 const fs = require("fs");
+const { StatusCodes } = require("http-status-codes");
 // spreadsheet key is the long id in the sheets URL
 const RESPONSES_SHEET_ID = environment.spreadsheetId;
 // Create a new document
@@ -17,77 +18,88 @@ var appRouter = function (app) {
   });
 
   app.get("/get-data", async function (req, res) {
-    await doc.useServiceAccountAuth({
-      client_email: environment.client_email,
-      private_key: environment.private_key,
-    });
-
-    // load the documents info
-    await doc.loadInfo();
-
-    // Index of the sheet
-    let sheet = doc.sheetsByIndex[0];
-
-    // Get all the rows
-    let rows = await sheet.getRows();
-
-    result = [];
-    for (let index = 0; index < rows.length; index++) {
-      const row = rows[index];
-      const obj = {
-        MatchNo: Number(row.MatchNo),
-        MatchDateTime: row.MatchDateTime,
-        Tour: row.Tour,
-        Round: row.Round,
-        Investment: Number(row.Investment),
-        Winnings: Number(row.Winnings),
-        ProfitOrLoss: Number(row.ProfitOrLoss),
-      };
-      result.push(obj);
+    try {
+      await doc.useServiceAccountAuth({
+        client_email: environment.client_email,
+        private_key: environment.private_key,
+      });
+  
+      // load the documents info
+      await doc.loadInfo();
+  
+      // Index of the sheet
+      let sheet = doc.sheetsByIndex[0];
+  
+      // Get all the rows
+      let rows = await sheet.getRows();
+  
+      result = [];
+      for (let index = 0; index < rows.length; index++) {
+        const row = rows[index];
+        const obj = {
+          MatchNo: Number(row.MatchNo),
+          MatchDateTime: row.MatchDateTime,
+          Tour: row.Tour,
+          Round: row.Round,
+          Investment: Number(row.Investment),
+          Winnings: Number(row.Winnings),
+          ProfitOrLoss: Number(row.ProfitOrLoss),
+        };
+        result.push(obj);
+      }
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(result);
+    } catch (error) {
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
     }
-    res.status(200).send(result);
   });
 
   app.post("/add-data", async function (req, res) {
-    await doc.useServiceAccountAuth({
-      client_email: environment.client_email,
-      private_key: environment.private_key,
-    });
+    try {
+      await doc.useServiceAccountAuth({
+        client_email: environment.client_email,
+        private_key: environment.private_key,
+      });
 
-    // load the documents info
-    await doc.loadInfo();
+      // load the documents info
+      await doc.loadInfo();
 
-    // Index of the sheet
-    let sheet = doc.sheetsByIndex[0];
-    const result = await sheet.addRow(req.body);
-    res.status(200).send(result);
+      // Index of the sheet
+      let sheet = doc.sheetsByIndex[0];
+      await sheet.addRow(req.body);
+      res.status(StatusCodes.OK).send("Added");
+    } catch (error) {
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
+    }
   });
 
   app.post("/delete-data", async function (req, res) {
-    await doc.useServiceAccountAuth({
-      client_email: environment.client_email,
-      private_key: environment.private_key,
-    });
-
-    // load the documents info
-    await doc.loadInfo();
-
-    // Index of the sheet
-    let sheet = doc.sheetsByIndex[0];
-
-    // Get all the rows
-    let rows = await sheet.getRows();
-
-    let result = null;
-    for (let index = 0; index < rows.length; index++) {
-      const row = rows[index];
-      if (row[req.body.keyValue] == req.body.thisValue) {
-        result = await rows[index].delete();
-        break;
+    try {
+      await doc.useServiceAccountAuth({
+        client_email: environment.client_email,
+        private_key: environment.private_key,
+      });
+  
+      // load the documents info
+      await doc.loadInfo();
+  
+      // Index of the sheet
+      let sheet = doc.sheetsByIndex[0];
+  
+      // Get all the rows
+      let rows = await sheet.getRows();
+  
+      let result = null;
+      for (let index = 0; index < rows.length; index++) {
+        const row = rows[index];
+        if (row[req.body.keyValue] == req.body.thisValue) {
+          result = await rows[index].delete();
+          break;
+        }
       }
+      res.status(StatusCodes.OK).send("Deleted");
+    } catch (error) {
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
     }
-    
-    res.status(200).send(result);
   });
 };
 
