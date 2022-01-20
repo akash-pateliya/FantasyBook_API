@@ -10,9 +10,9 @@ const getActualRequestDurationInMilliseconds = (start) => {
 let requestLogger = (req, res, next) => {
   //middleware function
   let current_datetime = new Date();
-  let formatted_date = 
+  let formatted_date =
     current_datetime.getDate() +
-    " " +
+    "-" +
     (current_datetime.getMonth() + 1) +
     "-" +
     current_datetime.getFullYear() +
