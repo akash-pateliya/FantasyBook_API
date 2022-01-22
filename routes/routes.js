@@ -42,7 +42,6 @@ var appRouter = function (app) {
             result.sort(compare);
             res.status(StatusCodes.OK).send(result);
           });
-        r;
       });
     } catch (error) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
@@ -55,10 +54,10 @@ var appRouter = function (app) {
         if (error) {
           res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
         }
-        res.body.MatchNo = Number(res.body.MatchNo);
-        res.body.Investment = Number(res.body.Investment);
-        res.body.Winnings = Number(res.body.Winnings);
-        res.body.ProfitOrLoss = Number(res.body.ProfitOrLoss);
+      req.body.MatchNo = Number(req.body.MatchNo);
+      req.body.Investment = Number(req.body.Investment);
+      req.body.Winnings = Number(req.body.Winnings);
+      req.body.ProfitOrLoss = Number(req.body.ProfitOrLoss);
         await client
           .db("FantasyBook")
           .collection("records")
