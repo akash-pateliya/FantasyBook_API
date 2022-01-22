@@ -55,6 +55,10 @@ var appRouter = function (app) {
         if (error) {
           res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
         }
+        res.body.MatchNo = Number(res.body.MatchNo);
+        res.body.Investment = Number(res.body.Investment);
+        res.body.Winnings = Number(res.body.Winnings);
+        res.body.ProfitOrLoss = Number(res.body.ProfitOrLoss);
         await client
           .db("FantasyBook")
           .collection("records")
