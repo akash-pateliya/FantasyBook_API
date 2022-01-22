@@ -21,6 +21,15 @@ var appRouter = function (app) {
         if (error) {
           res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
         }
+        function compare( a, b ) {
+          if ( a.MatchNo < b.MatchNo ){
+            return -1;
+          }
+          if ( a.MatchNo > b.MatchNo ){
+            return 1;
+          }
+          return 0;
+        }
         await client
           .db("FantasyBook")
           .collection("records")
@@ -29,6 +38,7 @@ var appRouter = function (app) {
             if (error) {
               res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
             }
+            result.sort(compare);
             res.status(StatusCodes.OK).send(result);
           });
         r;
