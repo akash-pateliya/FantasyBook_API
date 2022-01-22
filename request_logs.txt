@@ -38,3 +38,15 @@
 [23-1-2022-1:22:53] POST:/add-data 200 0.135 ms
 [23-1-2022-1:27:35] POST:/add-data 200 0.085 ms
 [23-1-2022-1:31:36] GET:/get-data 200 0.095 ms
+[23-1-2022-1:40:48] GET:/get-data 200 0.071 ms
+[23-1-2022-1:48:53] POST:/add-lib-tour 200 0.087 ms
+[23-1-2022-1:49:42] POST:/add-lib-tour 200 0.068 ms
+[23-1-2022-1:51:5] POST:/add-lib-tour 200 0.005 ms
+[23-1-2022-1:52:5] POST:/add-lib-tour 200 0.005 ms
+[23-1-2022-1:52:40] POST:/add-lib-tour 200 0.005 ms
+[23-1-2022-1:53:20] POST:/add-lib-tour 200 0.007 ms
+[23-1-2022-1:55:13] GET:/get-lib-tour 200 0.088 ms
+[23-1-2022-1:57:6] GET:/get-lib-tour 200 0.09 ms
+[23-1-2022-1:58:24] GET:/get-lib-tour 200 0.111 ms
+[23-1-2022-1:59:18] GET:/get-lib-tour 200 0.082 ms
+[23-1-2022-1:59:43] GET:/get-lib-tour 200 0.268 ms
