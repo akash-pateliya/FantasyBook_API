@@ -137,9 +137,49 @@ var appRouter = function (app) {
     }
   });
 
-  app.post("/update-lib-tour", function (req, res) {});
+  // app.post("/update-lib-tour", function (req, res) {
+  //   try {
+  //     client.connect(async (error) => {
+  //       if (error) {
+  //         res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
+  //       }
+  //       const myquery = { MatchNo: req.body.KeyValue };
+  //       const newvalues = { $set: req.body.updatedValue };
+  //       await client
+  //         .db("FantasyBook")
+  //         .collection("lib-tour")
+  //         .updateOne(myquery, newvalues, function (error, result) {
+  //           if (error) {
+  //             res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
+  //           }
+  //           res.status(StatusCodes.OK).send(result);
+  //         });
+  //     });
+  //   } catch (error) {
+  //     res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
+  //   }
+  // });
 
-  app.post("/delete-lib-tour", function (req, res) {});
+  app.post("/delete-lib-tour", function (req, res) {
+    try {
+      client.connect(async (error) => {
+        if (error) {
+          res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
+        }
+        await client
+          .db("FantasyBook")
+          .collection("lib-tour")
+          .deleteOne({ Tour: req.body.Tour }, function (error, result) {
+            if (error) {
+              res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
+            }
+            res.status(StatusCodes.OK).send(result);
+          });
+      });
+    } catch (error) {
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
+    }
+  });
 };
 
 module.exports = appRouter;

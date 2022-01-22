@@ -50,3 +50,6 @@
 [23-1-2022-1:58:24] GET:/get-lib-tour 200 0.111 ms
 [23-1-2022-1:59:18] GET:/get-lib-tour 200 0.082 ms
 [23-1-2022-1:59:43] GET:/get-lib-tour 200 0.268 ms
+[23-1-2022-2:13:54] POST:/delete-lib-tour 200 0.083 ms
+[23-1-2022-2:14:38] POST:/add-lib-tour 200 0.006 ms
+[23-1-2022-2:15:6] POST:/add-lib-tour 200 0.004 ms
