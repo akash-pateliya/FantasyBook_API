@@ -24,10 +24,10 @@ var appRouter = function (app) {
         }
         function compare(a, b) {
           if (a.MatchNo < b.MatchNo) {
-            return -1;
+            return 1;
           }
           if (a.MatchNo > b.MatchNo) {
-            return 1;
+            return -1;
           }
           return 0;
         }
