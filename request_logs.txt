@@ -31,3 +31,7 @@
 [23-1-2022-0:24:17] GET:/get-data 200 0.12 ms
 [23-1-2022-0:27:42] POST:/add-data 200 0.067 ms
 [23-1-2022-0:29:49] POST:/delete-data 200 0.007 ms
+[23-1-2022-0:34:27] GET:/get-data 200 0.108 ms
+[23-1-2022-0:34:52] POST:/add-data 200 0.036 ms
+[23-1-2022-0:38:51] POST:/delete-data 200 0.1 ms
+[23-1-2022-0:39:34] POST:/delete-data 200 0.059 ms

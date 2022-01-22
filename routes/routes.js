@@ -53,8 +53,12 @@ var appRouter = function (app) {
         await client
           .db("FantasyBook")
           .collection("records")
-          .insertOne(req.body);
-        res.status(StatusCodes.OK).send({ status: true });
+          .insertOne(req.body, function (error, result) {
+            if (error) {
+              res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
+            }
+            res.status(StatusCodes.OK).send(result);
+          });
       });
     } catch (error) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
@@ -76,8 +80,12 @@ var appRouter = function (app) {
         await client
           .db("FantasyBook")
           .collection("records")
-          .deleteOne({ MatchNo: req.body.thisValue });
-        res.status(StatusCodes.OK).send({ status: true });
+          .deleteOne({ MatchNo: req.body.thisValue }, function (error, result) {
+            if (error) {
+              res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
+            }
+            res.status(StatusCodes.OK).send(result);
+          });
       });
     } catch (error) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
