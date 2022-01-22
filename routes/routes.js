@@ -23,16 +23,16 @@ var appRouter = function (app) {
         client_email: environment.client_email,
         private_key: environment.private_key,
       });
-  
+
       // load the documents info
       await doc.loadInfo();
-  
+
       // Index of the sheet
       let sheet = doc.sheetsByIndex[0];
-  
+
       // Get all the rows
       let rows = await sheet.getRows();
-  
+
       result = [];
       for (let index = 0; index < rows.length; index++) {
         const row = rows[index];
@@ -66,7 +66,7 @@ var appRouter = function (app) {
       // Index of the sheet
       let sheet = doc.sheetsByIndex[0];
       await sheet.addRow(req.body);
-      res.status(StatusCodes.OK).send("Added");
+      res.status(StatusCodes.OK).send({ status: true });
     } catch (error) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
     }
@@ -78,16 +78,16 @@ var appRouter = function (app) {
         client_email: environment.client_email,
         private_key: environment.private_key,
       });
-  
+
       // load the documents info
       await doc.loadInfo();
-  
+
       // Index of the sheet
       let sheet = doc.sheetsByIndex[0];
-  
+
       // Get all the rows
       let rows = await sheet.getRows();
-  
+
       let result = null;
       for (let index = 0; index < rows.length; index++) {
         const row = rows[index];
@@ -96,7 +96,7 @@ var appRouter = function (app) {
           break;
         }
       }
-      res.status(StatusCodes.OK).send("Deleted");
+      res.status(StatusCodes.OK).send({ status: true });
     } catch (error) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
     }
