@@ -29,11 +29,11 @@ let requestLogger = (req, res, next) => {
   const durationInMilliseconds = getActualRequestDurationInMilliseconds(start);
   let log = `[${formatted_date}] ${method}:${url} ${status} ${durationInMilliseconds.toLocaleString()} ms`;
   console.log(log);
-  fs.appendFile("request_logs.txt", log + "\n", (err) => {
-    if (err) {
-      console.log(err);
-    }
-  });
+  // fs.appendFile("request_logs.txt", log + "\n", (err) => {
+  //   if (err) {
+  //     console.log(err);
+  //   }
+  // });
   next();
 };
 
