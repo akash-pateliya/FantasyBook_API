@@ -54,10 +54,10 @@ var appRouter = function (app) {
         if (error) {
           res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
         }
-      req.body.MatchNo = Number(req.body.MatchNo);
-      req.body.Investment = Number(req.body.Investment);
-      req.body.Winnings = Number(req.body.Winnings);
-      req.body.ProfitOrLoss = Number(req.body.ProfitOrLoss);
+        req.body.MatchNo = Number(req.body.MatchNo);
+        req.body.Investment = Number(req.body.Investment);
+        req.body.Winnings = Number(req.body.Winnings);
+        req.body.ProfitOrLoss = Number(req.body.ProfitOrLoss);
         await client
           .db("FantasyBook")
           .collection("records")
@@ -88,6 +88,40 @@ var appRouter = function (app) {
             }
             res.status(StatusCodes.OK).send(result);
           });
+      });
+    } catch (error) {
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
+    }
+  });
+
+  app.post("/update-data", async function (req, res) {
+    try {
+      client.connect(async (error) => {
+        if (error) {
+          res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
+        }
+        await client
+          .db("FantasyBook")
+          .collection("records")
+          .updateOne(
+            { MatchNo: req.body.MatchNo },
+            {
+              $set: {
+                MatchDateTime: req.body.MatchDateTime,
+                Tour: req.body.Tour,
+                Round: req.body.Round,
+                Investment: req.body.Investment,
+                Winnings: req.body.Winnings,
+                ProfitOrLoss: req.body.ProfitOrLoss,
+              },
+            },
+            function (error, result) {
+              if (error) {
+                res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
+              }
+              res.status(StatusCodes.OK).send(result);
+            }
+          );
       });
     } catch (error) {
       res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
