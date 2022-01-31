@@ -25,8 +25,9 @@ var appRouter = function (app) {
       "NOV",
       "DEC",
     ];
-    const currentMonth = monthNames[new Date().getMonth()];
-    const currentYear = new Date().getFullYear();
+    const date = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
+    const currentMonth = monthNames[date.getMonth()];
+    const currentYear = date.getFullYear();
     return `${currentMonth}-${currentYear}`;
   }
 
