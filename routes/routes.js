@@ -169,10 +169,8 @@ var appRouter = function (app) {
           if (error) {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
           }
-          console.log(result);
           resultArr = [];
           result.forEach((data) => {
-            console.log(data);
             resultArr.push(data.Tour);
           });
           res.status(StatusCodes.OK).send(resultArr);
