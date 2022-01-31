@@ -1,6 +1,6 @@
 const { MongoClient } = require("mongodb");
 const { StatusCodes } = require("http-status-codes");
-const { moment } = require("moment");
+import moment from 'moment';
 
 var appRouter = function (app) {
   const mongoCollectionName = getMongoCollectionName();
