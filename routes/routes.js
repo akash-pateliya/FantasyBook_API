@@ -1,7 +1,6 @@
 const { MongoClient } = require("mongodb");
 const { StatusCodes } = require("http-status-codes");
 
-
 var appRouter = function (app) {
   const mongoCollectionName = getMongoCollectionName();
   const uri =
@@ -12,7 +11,23 @@ var appRouter = function (app) {
   });
 
   function getMongoCollectionName() {
-    return "FEB-2022";
+    const monthNames = [
+      "JAN",
+      "FEB",
+      "MAR",
+      "APR",
+      "MAY",
+      "JUN",
+      "JUL",
+      "AUG",
+      "SEP",
+      "OCT",
+      "NOV",
+      "DEC",
+    ];
+    const currentMonth = monthNames[new Date().getMonth()];
+    const currentYear = new Date().getFullYear();
+    return `${currentMonth}-${currentYear}`;
   }
 
   app.get("/", function (req, res) {
