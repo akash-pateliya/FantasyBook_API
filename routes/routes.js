@@ -1,9 +1,7 @@
 const { MongoClient } = require("mongodb");
 const { StatusCodes } = require("http-status-codes");
 
-function getMongoCollectionName() {
-  return "FEB-2022";
-}
+
 var appRouter = function (app) {
   const mongoCollectionName = getMongoCollectionName();
   const uri =
@@ -12,6 +10,10 @@ var appRouter = function (app) {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
+
+  function getMongoCollectionName() {
+    return "FEB-2022";
+  }
 
   app.get("/", function (req, res) {
     const result = {
