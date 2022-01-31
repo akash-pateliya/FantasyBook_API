@@ -2,6 +2,7 @@ const { MongoClient } = require("mongodb");
 const { StatusCodes } = require("http-status-codes");
 
 var appRouter = function (app) {
+  const mongoCollectionName = "records";
   const uri =
     "mongodb+srv://root:root@fantasybook.qxgk4.mongodb.net/FantasyBook?retryWrites=true&w=majority";
   const client = new MongoClient(uri, {
@@ -33,7 +34,7 @@ var appRouter = function (app) {
         }
         await client
           .db("FantasyBook")
-          .collection("records")
+          .collection(mongoCollectionName)
           .find()
           .toArray(function (error, result) {
             if (error) {
@@ -60,7 +61,7 @@ var appRouter = function (app) {
         req.body.ProfitOrLoss = Number(req.body.ProfitOrLoss);
         await client
           .db("FantasyBook")
-          .collection("records")
+          .collection(mongoCollectionName)
           .insertOne(req.body, function (error, result) {
             if (error) {
               res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
@@ -81,7 +82,7 @@ var appRouter = function (app) {
         }
         await client
           .db("FantasyBook")
-          .collection("records")
+          .collection(mongoCollectionName)
           .deleteOne({ MatchNo: req.body.thisValue }, function (error, result) {
             if (error) {
               res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
@@ -102,7 +103,7 @@ var appRouter = function (app) {
         }
         await client
           .db("FantasyBook")
-          .collection("records")
+          .collection(mongoCollectionName)
           .updateOne(
             { MatchNo: req.body.MatchNo },
             {
