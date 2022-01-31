@@ -1,11 +1,10 @@
 const { MongoClient } = require("mongodb");
 const { StatusCodes } = require("http-status-codes");
 
-var collectionName = function() {
-    return "FEB-2022";
-}
 var appRouter = function (app) {
-  const mongoCollectionName = collectionName;
+  const mongoCollectionName = function () {
+    return "FEB-2022";
+  };
   const uri =
     "mongodb+srv://root:root@fantasybook.qxgk4.mongodb.net/FantasyBook?retryWrites=true&w=majority";
   const client = new MongoClient(uri, {
@@ -58,7 +57,7 @@ var appRouter = function (app) {
         if (error) {
           res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
         }
-        if(req.body?.MatchNo == null){
+        if (req.body?.MatchNo == null) {
           req.body.MatchNo = 1;
         }
         req.body.MatchNo = Number(req.body.MatchNo);
@@ -225,6 +224,5 @@ var appRouter = function (app) {
     }
   });
 };
-
 
 module.exports = appRouter;
