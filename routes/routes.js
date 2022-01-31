@@ -2,7 +2,7 @@ const { MongoClient } = require("mongodb");
 const { StatusCodes } = require("http-status-codes");
 
 var appRouter = function (app) {
-  const mongoCollectionName = "records";
+  const mongoCollectionName = "FEB-2020";
   const uri =
     "mongodb+srv://root:root@fantasybook.qxgk4.mongodb.net/FantasyBook?retryWrites=true&w=majority";
   const client = new MongoClient(uri, {
