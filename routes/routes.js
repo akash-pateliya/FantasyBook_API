@@ -55,9 +55,11 @@ var appRouter = function (app) {
         if (error) {
           res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
         }
+        console.log(req.body.MatchNo);
         if(req.body.MatchNo == 0){
           req.body.MatchNo = 1;
         }
+        console.log(req.body.MatchNo);
         req.body.MatchNo = Number(req.body.MatchNo);
         req.body.Investment = Number(req.body.Investment);
         req.body.Winnings = Number(req.body.Winnings);
