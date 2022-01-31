@@ -3,8 +3,8 @@ const { StatusCodes } = require("http-status-codes");
 const { moment } = require("moment");
 
 var appRouter = function (app) {
-  // const mongoCollectionName = getMongoCollectionName();
-  const mongoCollectionName = "FEB-2022";
+  const mongoCollectionName = getMongoCollectionName();
+  // const mongoCollectionName = "FEB-2022";
   const uri =
     "mongodb+srv://root:root@fantasybook.qxgk4.mongodb.net/FantasyBook?retryWrites=true&w=majority";
   const client = new MongoClient(uri, {
