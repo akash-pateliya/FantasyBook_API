@@ -1,8 +1,10 @@
 const { MongoClient } = require("mongodb");
 const { StatusCodes } = require("http-status-codes");
+const { moment } = require("moment");
 
 var appRouter = function (app) {
-  const mongoCollectionName = getMongoCollectionName();
+  // const mongoCollectionName = getMongoCollectionName();
+  const mongoCollectionName = "FEB-2022";
   const uri =
     "mongodb+srv://root:root@fantasybook.qxgk4.mongodb.net/FantasyBook?retryWrites=true&w=majority";
   const client = new MongoClient(uri, {
@@ -25,9 +27,10 @@ var appRouter = function (app) {
       "NOV",
       "DEC",
     ];
-    const date = new Date().toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
-    const currentMonth = monthNames[date.getMonth()];
-    const currentYear = date.getFullYear();
+    const date = moment().utcOffset("+05:30").format("MMM Do YY");
+    console.log(date);
+    const currentMonth = monthNames[new Date().getMonth()];
+    const currentYear = new Date().getFullYear();
     return `${currentMonth}-${currentYear}`;
   }
 
@@ -76,7 +79,7 @@ var appRouter = function (app) {
         if (error) {
           res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
         }
-        if (req.body?.MatchNo == null) {
+        if (req.body.MatchNo == null) {
           req.body.MatchNo = 1;
         }
         req.body.MatchNo = Number(req.body.MatchNo);
