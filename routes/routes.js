@@ -9,6 +9,8 @@ var appRouter = function (app) {
     useUnifiedTopology: true,
   });
 
+  const MongoCollectionName = "records";
+
   app.get("/", function (req, res) {
     const result = {
       "/": "/",
@@ -33,7 +35,7 @@ var appRouter = function (app) {
         }
         await client
           .db("FantasyBook")
-          .collection("records")
+          .collection(this.MongoCollectionName)
           .find()
           .toArray(function (error, result) {
             if (error) {
@@ -60,7 +62,7 @@ var appRouter = function (app) {
         req.body.ProfitOrLoss = Number(req.body.ProfitOrLoss);
         await client
           .db("FantasyBook")
-          .collection("records")
+          .collection(this.MongoCollectionName)
           .insertOne(req.body, function (error, result) {
             if (error) {
               res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
@@ -81,7 +83,7 @@ var appRouter = function (app) {
         }
         await client
           .db("FantasyBook")
-          .collection("records")
+          .collection(this.MongoCollectionName)
           .deleteOne({ MatchNo: req.body.thisValue }, function (error, result) {
             if (error) {
               res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(error);
@@ -102,7 +104,7 @@ var appRouter = function (app) {
         }
         await client
           .db("FantasyBook")
-          .collection("records")
+          .collection(this.MongoCollectionName)
           .updateOne(
             { MatchNo: req.body.MatchNo },
             {
