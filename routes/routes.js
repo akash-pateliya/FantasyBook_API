@@ -177,7 +177,7 @@ var appRouter = function (app) {
           });
           res.status(StatusCodes.OK).send(resultArr);
         });
-      r;
+      ;
     });
   });
 
