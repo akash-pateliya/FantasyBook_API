@@ -29,7 +29,7 @@ var appRouter = function (app) {
     ];
     const date = moment().utcOffset("+05:30").format("MMM Do YYYY");
     const currentMonth = date.substring(0, 3).toUpperCase();
-    const currentYear = date.substring(8);
+    const currentYear = date.substring(9);
     console.log(`${currentMonth}-${currentYear}`)
     return `${currentMonth}-${currentYear}`;
   }
