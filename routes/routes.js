@@ -29,9 +29,9 @@ var appRouter = function (app) {
     ];
     const date = moment().utcOffset("+05:30").format("MMM Do YYYY");
     const currentMonth = date.substring(0, 3).toUpperCase();
-    const currentYear = date.substring(9);
-    console.log(`${currentMonth}-${currentYear}`)
-    return `${currentMonth}-${currentYear}`;
+    const currentYear = date.substring(date.length-4);
+    const collectionName = `${currentMonth}-${currentYear}`;
+    return collectionName;
   }
 
   app.get("/", function (req, res) {
